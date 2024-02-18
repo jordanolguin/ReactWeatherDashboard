@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
-import { Card, Form, Button, Container, Row, Col } from "react-bootstrap";
+import { Card, Form, Button, Container } from "react-bootstrap";
+import Forecast from "./Forecast";
 import SearchHistory from "./SearchHistory";
 
 const Weather = () => {
@@ -74,7 +75,6 @@ const Weather = () => {
           Get Weather
         </Button>
       </Form>
-
       {weatherData && (
         <Card className="mb-3">
           <Card.Body>
@@ -90,30 +90,7 @@ const Weather = () => {
           </Card.Body>
         </Card>
       )}
-
-      {forcastData && (
-        <Row xs={1} md={2} lg={3} className="g-4">
-          {forcastData.list
-            .filter((_, index) => index % 8 === 0)
-            .map((forcast, index) => (
-              <Col key={index}>
-                <Card>
-                  <Card.Body>
-                    <Card.Title>
-                      {new Date(forcast.dt * 1000).toLocaleDateString()}
-                    </Card.Title>
-                    <Card.Text>
-                      Temperature: {forcast.main.temp}°F
-                      <br />
-                      {forcast.weather[0].description}
-                    </Card.Text>
-                  </Card.Body>
-                </Card>
-              </Col>
-            ))}
-        </Row>
-      )}
-
+      <Forecast forecastData={forcastData} />
       <SearchHistory
         history={history}
         onCitySelect={handleCitySelect}
