@@ -1,12 +1,12 @@
-import "./App.css";
+import Weather from "./components/Weather";
+import Container from "react-bootstrap/Container";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Weather App</h1>
-      </header>
-    </div>
+    <Container className="p-3">
+      <h1 className="text-center">Weather App</h1>
+      <Weather />
+    </Container>
   );
 }
 
