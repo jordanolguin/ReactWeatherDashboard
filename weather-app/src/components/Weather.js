@@ -1,9 +1,11 @@
 import { useState } from "react";
 import axios from "axios";
 import { Card, Form, Button, Container, Row, Col } from "react-bootstrap";
+import SearchHistory from "./SearchHistory";
 
 const Weather = () => {
   const [city, setCity] = useState("");
+  const [history, setHistory] = useState([]);
   const [weatherData, setWeatherData] = useState(null);
   const [forcastData, setForcastData] = useState(null);
 
@@ -39,8 +41,21 @@ const Weather = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (city && !history.includes(city)) {
+      setHistory([...history, city]);
+    }
     await fetchWeatherData();
     await fetchForcastData();
+  };
+
+  const handleCitySelect = async (city) => {
+    setCity(city);
+    await fetchWeatherData(city);
+    await fetchForcastData(city);
+  };
+
+  const handleClearHistory = () => {
+    setHistory([]);
   };
 
   return (
@@ -98,6 +113,12 @@ const Weather = () => {
             ))}
         </Row>
       )}
+
+      <SearchHistory
+        history={history}
+        onCitySelect={handleCitySelect}
+        onClearHistory={handleClearHistory}
+      />
     </Container>
   );
 };
