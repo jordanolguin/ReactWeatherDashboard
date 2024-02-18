@@ -78,22 +78,24 @@ const Weather = () => {
 
       {forcastData && (
         <Row xs={1} md={2} lg={3} className="g-4">
-          {forcastData.list.slice(0, 5).map((forcast, index) => (
-            <Col key={index}>
-              <Card>
-                <Card.Body>
-                  <Card.Title>
-                    {new Date(forcast.dt * 1000).toLocaleDateString()}
-                  </Card.Title>
-                  <Card.Text>
-                    Temperature: {forcast.main.temp}°F
-                    <br />
-                    {forcast.weather[0].description}
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
-          ))}
+          {forcastData.list
+            .filter((_, index) => index % 8 === 0)
+            .map((forcast, index) => (
+              <Col key={index}>
+                <Card>
+                  <Card.Body>
+                    <Card.Title>
+                      {new Date(forcast.dt * 1000).toLocaleDateString()}
+                    </Card.Title>
+                    <Card.Text>
+                      Temperature: {forcast.main.temp}°F
+                      <br />
+                      {forcast.weather[0].description}
+                    </Card.Text>
+                  </Card.Body>
+                </Card>
+              </Col>
+            ))}
         </Row>
       )}
     </Container>
