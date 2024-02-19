@@ -4,6 +4,8 @@
 
 The React Weather Dashboard is a sleek, user-friendly web application that provides real-time weather information, including forecasts, humidity, wind speed, and atmospheric conditions. Utilizing data from the OpenWeatherMap API, this dashboard offers an intuitive interface for users to search for and display weather data for cities worldwide. Designed with responsiveness in mind, it ensures an optimal viewing experience across a wide range of devices.
 
+Check out the App here: [Weather Dashboard](https://jordanolguin.github.io/ReactWeatherDashboard/)
+
 ## Features
 
 - **Live Weather Data**: Displays current weather conditions, including temperature, humidity, and wind speed.
