@@ -1,0 +1,26 @@
+.historyContainer {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.historyTitle {
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.historyItem {
+  cursor: pointer;
+}
+
+.clearHistoryButton {
+  background-color: #dc3545;
+  border-color: #dc3545;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.clearHistoryButton:hover {
+  background-color: #c82333;
+  border-color: #bd2130;
+}

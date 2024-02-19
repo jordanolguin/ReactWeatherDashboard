@@ -1,0 +1,22 @@
+.searchForm {
+  margin-bottom: 20px;
+}
+
+.searchButton {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.searchButton:hover {
+  background-color: #0069d9;
+  border-color: #0062cc;
+}
+
+.searchInput {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.searchLabel {
+  font-weight: bold;
+}

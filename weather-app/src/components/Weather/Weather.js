@@ -1,9 +1,10 @@
 import { useState } from "react";
 import axios from "axios";
-import { Card, Container } from "react-bootstrap";
-import CitySearch from "./CitySearch";
-import Forecast from "./Forecast";
-import SearchHistory from "./SearchHistory";
+import { Container } from "react-bootstrap";
+import CitySearch from "../CitySearch/CitySearch";
+import Forecast from "../Forecast/Forecast";
+import SearchHistory from "../SearchHistory/SearchHistory";
+import "./Weather.css";
 
 const Weather = () => {
   const [city, setCity] = useState("");
@@ -66,24 +67,21 @@ const Weather = () => {
     <Container>
       <CitySearch onCitySubmit={handleCitySearchSubmit} />
       {weatherData && (
-        <Card className="mb-3">
-          <Card.Body>
-            <Card.Title>{weatherData.name}</Card.Title>
-            <Card.Text>
+        <div className="weather-card">
+          <div className="weather-info">
+            <h2>{weatherData.name}</h2>
+            <div className="weather-icon">
               <img
                 src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}.png`}
                 alt={weatherData.weather[0].description}
               />
-              <br />
-              Temperature: {weatherData.main.temp}°F
-              <br />
-              Humidity: {weatherData.main.humidity}%<br />
-              Wind Speed: {weatherData.wind.speed} mph
-              <br />
-              Conditions: {weatherData.weather[0].description}
-            </Card.Text>
-          </Card.Body>
-        </Card>
+            </div>
+            <p>Temperature: {weatherData.main.temp}°F</p>
+            <p>Humidity: {weatherData.main.humidity}%</p>
+            <p>Wind Speed: {weatherData.wind.speed} mph</p>
+            <p>Conditions: {weatherData.weather[0].description}</p>
+          </div>
+        </div>
       )}
       <Forecast forecastData={forecastData} />
       <SearchHistory
