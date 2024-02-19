@@ -6,6 +6,8 @@ The React Weather Dashboard is a sleek, user-friendly web application that provi
 
 Check out the App here: [Weather Dashboard](https://jordanolguin.github.io/ReactWeatherDashboard/)
 
+![Mobile Screenshot](./weather-app/src/images/MobileScreenshot.png)
+
 ## Features
 
 - **Live Weather Data**: Displays current weather conditions, including temperature, humidity, and wind speed.
