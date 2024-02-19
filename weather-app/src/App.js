@@ -6,7 +6,7 @@ import "./App.css";
 function App() {
   return (
     <Container className="p-3">
-      <h1 className="text-center">Weather App</h1>
+      <h1 className="text-center">Weather</h1>
       <Weather />
     </Container>
   );

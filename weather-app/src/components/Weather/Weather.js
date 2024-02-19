@@ -67,7 +67,7 @@ const Weather = () => {
     <Container>
       <CitySearch onCitySubmit={handleCitySearchSubmit} />
       {weatherData && (
-        <div className="weather-card">
+        <div className="weather-card glassmorphism">
           <div className="weather-info">
             <h2>{weatherData.name}</h2>
             <div className="weather-icon">
