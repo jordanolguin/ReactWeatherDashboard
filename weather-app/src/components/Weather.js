@@ -80,6 +80,11 @@ const Weather = () => {
           <Card.Body>
             <Card.Title>{weatherData.name}</Card.Title>
             <Card.Text>
+              <img
+                src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}.png`}
+                alt={weatherData.weather[0].description}
+              />
+              <br />
               Temperature: {weatherData.main.temp}°F
               <br />
               Humidity: {weatherData.main.humidity}%<br />

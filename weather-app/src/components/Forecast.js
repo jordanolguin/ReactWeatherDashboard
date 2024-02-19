@@ -14,6 +14,10 @@ const Forecast = ({ forecastData }) => {
                 <Card.Title>
                   {new Date(forecast.dt * 1000).toLocaleDateString()}
                 </Card.Title>
+                <img
+                  src={`https://openweathermap.org/img/wn/${forecast.weather[0].icon}.png`}
+                  alt={forecast.weather[0].description}
+                />
                 <Card.Text>
                   Temperature: {forecast.main.temp}°F
                   <br />
