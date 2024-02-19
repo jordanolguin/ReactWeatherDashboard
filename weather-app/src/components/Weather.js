@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
-import { Card, Form, Button, Container } from "react-bootstrap";
+import { Card, Container } from "react-bootstrap";
+import CitySearch from "./CitySearch";
 import Forecast from "./Forecast";
 import SearchHistory from "./SearchHistory";
 
@@ -8,51 +9,53 @@ const Weather = () => {
   const [city, setCity] = useState("");
   const [history, setHistory] = useState([]);
   const [weatherData, setWeatherData] = useState(null);
-  const [forcastData, setForcastData] = useState(null);
+  const [forecastData, setForecastData] = useState(null);
 
-  const fetchWeatherData = async () => {
-    if (!city) return;
+  const fetchWeatherData = async (selectedCity) => {
+    const searchCity = selectedCity || city;
+    if (!searchCity) return;
 
     const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`;
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${searchCity}&appid=${apiKey}&units=imperial`;
 
     try {
       const response = await axios.get(url);
       setWeatherData(response.data);
+      if (searchCity && !history.includes(searchCity)) {
+        setHistory([...history, searchCity]);
+      }
     } catch (error) {
       console.error("Error fetching weather data:", error);
       setWeatherData(null);
     }
   };
 
-  const fetchForcastData = async () => {
-    if (!city) return;
+  const fetchForecastData = async (selectedCity) => {
+    const searchCity = selectedCity || city;
+    if (!searchCity) return;
 
     const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
-    const forcastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=imperial`;
+    const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${searchCity}&appid=${apiKey}&units=imperial`;
 
     try {
-      const response = await axios.get(forcastUrl);
-      setForcastData(response.data);
+      const response = await axios.get(forecastUrl);
+      setForecastData(response.data);
     } catch (error) {
-      console.error("Error fetching forcast data:", error);
-      setForcastData(null);
+      console.error("Error fetching forecast data:", error);
+      setForecastData(null);
     }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (city && !history.includes(city)) {
-      setHistory([...history, city]);
-    }
-    await fetchWeatherData();
-    await fetchForcastData();
+  const handleCitySearchSubmit = async (searchCity) => {
+    setCity(searchCity);
+    await fetchWeatherData(searchCity);
+    await fetchForecastData(searchCity);
   };
 
-  const handleCitySelect = async (city) => {
-    setCity(city);
-    await fetchWeatherData(city);
-    await fetchForcastData(city);
+  const handleCitySelect = async (selectedCity) => {
+    setCity(selectedCity);
+    await fetchWeatherData(selectedCity);
+    await fetchForecastData(selectedCity);
   };
 
   const handleClearHistory = () => {
@@ -61,20 +64,7 @@ const Weather = () => {
 
   return (
     <Container>
-      <Form onSubmit={handleSubmit} className="mb-3">
-        <Form.Group controlId="cityInput">
-          <Form.Label>City:</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Enter city name"
-            value={city || ""}
-            onChange={(e) => setCity(e.target.value)}
-          />
-        </Form.Group>
-        <Button variant="primary" type="submit">
-          Get Weather
-        </Button>
-      </Form>
+      <CitySearch onCitySubmit={handleCitySearchSubmit} />
       {weatherData && (
         <Card className="mb-3">
           <Card.Body>
@@ -95,7 +85,7 @@ const Weather = () => {
           </Card.Body>
         </Card>
       )}
-      <Forecast forecastData={forcastData} />
+      <Forecast forecastData={forecastData} />
       <SearchHistory
         history={history}
         onCitySelect={handleCitySelect}
